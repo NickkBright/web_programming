@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    
+  <title>LastFM Api Usage</title>
+  <link href="css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    
+    <script src="js/jquery.js" type="text/javascript"></script>
+    <script src="js/handlebars.runtime.js" type="text/javascript"></script>
+    <script src="js/handlebars.js" type="text/javascript"></script>
+    
+</head>
+<body>
+<div class="row">
+    <div class="col s12">
+<nav class="grey darken-4">
+    <div class="nav-wrapper container">
+        <a href="index.html" class="brand-logo red-text center">LastFM Artist Search</a>
+    </div>
+  </nav>
+        <div class="container">
+            <form id="user-search-action">
+            <div class="col s8">
+            
+					<div class="form-group">
+					    <input type="text" class="form-control search-input" id="search-user" placeholder="User name">
+					</div>
+            </div>
+            <div class="col s4">
+					<div class="form-group">
+					    <input type="text" class="form-control search-input" id="set-limit" placeholder="Limit of artists">
+					</div>
+                 </div>
+                <div class="submit-button center">
+						<button type="submit" class="btn btn-primary btn-lg">Search</button>
+					</div>
+            </form>
+            </div>
+        
+</div>
+    </div>
+    
+    <div class="row">
+        <div class="json-info">
+        <script id="lastfm-template" type="text/x-handlebars-template">
+			    <table class="lastfm highlight centered">
+			    	<thead>
+			    		<tr class="table-header">
+			    			<th>Artist Photo</th>
+			    			<th>Artist Name</th>
+			    			<th>Playcount</th>
+			    		</tr>
+			    	</thead>
+			    	<tbody>
+			    		{{#each topartists.artist}}
+				    		<tr>
+				    			<td>
+				    				<img class='circle' src='{{image.[2].#text}}'/>
+				    			</td>
+				    			<td>{{name}}</td>
+				    			<td>{{playcount}}</td>
+				    		</tr>
+			    		{{/each}}
+			    	</tbody>
+			    </table>
+        </div>
+    
+    </div>
+  <!--  Scripts-->
+    <script src="js/application.js" type="text/javascript"></script>
+    
+  </body>
+</html>

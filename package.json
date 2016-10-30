@@ -1,0 +1,21 @@
+{
+  "name": "LastFM_api",
+  "version": "1.0.0",
+  "description": "Search of artists from lastFM",
+  "main": "server.js",
+  "scripts": {
+    "test": "console.log('Application started');",
+    "start": "node server.js"
+  },
+  "author": "Nikita Gressky",
+  "license": "ISC",
+  "devDependencies": {
+    "materialize-css": "^0.97.7",
+    "jquery": "^3.1.1",
+    "node-static": "^0.7.9",
+    "gulp":  "^3.9.1"
+  },
+  "dependencies": {
+    "handlebars": "^4.0.5"
+  }
+}
