@@ -10,10 +10,10 @@
     <script src="js/jquery.js" type="text/javascript"></script>
     <script src="js/handlebars.runtime.js" type="text/javascript"></script>
     <script src="js/handlebars.js" type="text/javascript"></script>
-    
+    <script src="js/waves.js" type="text/javascript"></script>
 </head>
 <body>
-<div class="row">
+<div class="row size">
     <div class="col s12">
 <nav class="grey darken-4">
     <div class="nav-wrapper container">
@@ -21,7 +21,7 @@
     </div>
   </nav>
         <div class="container">
-            <form id="user-search-action">
+            <form id="top-artist-search">
             <div class="col s8">
             
 					<div class="form-group">
@@ -34,42 +34,41 @@
 					</div>
                  </div>
                 <div class="submit-button center">
-						<button type="submit" class="btn btn-primary btn-lg">Search</button>
+						<button type="submit" class="search btn waves-effect waves-light btn-large red">Search</button>
 					</div>
             </form>
             </div>
         
 </div>
     </div>
-    
-    <div class="row">
-        <div class="json-info">
+   
+      <div class="container json-info"></div>
+
         <script id="lastfm-template" type="text/x-handlebars-template">
-			    <table class="lastfm highlight centered">
-			    	<thead>
-			    		<tr class="table-header">
-			    			<th>Artist Photo</th>
-			    			<th>Artist Name</th>
-			    			<th>Playcount</th>
-			    		</tr>
-			    	</thead>
-			    	<tbody>
-			    		{{#each topartists.artist}}
-				    		<tr>
-				    			<td>
-				    				<img class='circle' src='{{image.[2].#text}}'/>
-				    			</td>
-				    			<td>{{name}}</td>
-				    			<td>{{playcount}}</td>
-				    		</tr>
-			    		{{/each}}
-			    	</tbody>
-			    </table>
-        </div>
-    
-    </div>
+			     <table class="lastfm highlight centered">
+  			    	<thead>
+  			    		<tr class="table-header">
+  			    			<th>Artist Photo</th>
+  			    			<th>Artist Name</th>
+  			    			<th>Playcount</th>
+  			    		</tr>
+  			    	</thead>
+  			    	<tbody>
+  			    		{{#each objects}}
+  				    		<tr>
+  				    			<td>
+  				    				<img class='circle' src='{{image}}'/>
+  				    			</td>
+  				    			<td>{{name}}</td>
+  				    			<td>{{playcount}}</td>
+  				    		</tr>
+  			    		{{/each}}
+  			    	</tbody>
+  			    </table>
+        </script>
+
+
   <!--  Scripts-->
     <script src="js/application.js" type="text/javascript"></script>
-    
   </body>
 </html>
