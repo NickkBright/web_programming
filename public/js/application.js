@@ -23,11 +23,9 @@ function addNewDiv(){
 }
 
 function userSearch(username, APIkey, limit){
-	var XHR = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
 		var xhr = new XMLHttpRequest();
 		xhr.open('GET', 'http://ws.audioscrobbler.com/2.0/?method=user.gettopartists&user='+username+'&api_key='+APIkey+'&limit='+limit+'&format=json', true); 
 		xhr.onload = function(){
-			$(".loading").hide();
 			if(this.status == 422){
 				alert("422 Unprocessable Entity");
 			}
@@ -36,6 +34,7 @@ function userSearch(username, APIkey, limit){
 			}
 			if(this.status == 200){
 				var responseData = JSON.parse(xhr.responseText);
+				if(responseData.topartists.artist.length==0){alert("User Not Found! Try again")};
 				console.log(responseData.topartists.artist);
 				for(var i = 0; i < limit; ++i){
 					responseData.topartists.artist[i].image = Object.keys(responseData.topartists.artist[i].image[2]).map(function(key){return responseData.topartists.artist[i].image[2][key]});
