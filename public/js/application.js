@@ -9,6 +9,7 @@ $(document).ready(function(){
 		var username = $("#search-user").val();
         var APIkey = "a5ccaac44e419797359236f7632f2950";
         var limit = $("#set-limit").val();
+		if (limit ==""){limit = 50};
 		userSearch(username,APIkey,limit);
 	});
 });
