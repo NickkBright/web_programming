@@ -22,12 +22,18 @@ function addNewDiv(nameOfClass){
 function userSearch(username, APIkey, limit){
         $(".json-info").remove();
         $(".error").remove();
+        $(".user-not-found").remove();
 		var xhr = new XMLHttpRequest();
 		xhr.open('GET', 'http://ws.audioscrobbler.com/2.0/?method=user.gettopartists&user='+username+'&api_key='+APIkey+'&limit='+limit+'&format=json', true); 
 		xhr.onload = function(){
 			if(this.status == 200){
 				var responseData = JSON.parse(xhr.responseText);
-				if(responseData.topartists.artist.length==0){alert("User Not Found! Try again")};
+				if((responseData.error==6)||(responseData.topartists.artist.length==0)){
+                    addNewDiv("user-not-found");
+                    let source = $("#not-found-template").html();
+				    let template = Handlebars.compile(source);
+                    $('.user-not-found').append(template);
+                };
 				console.log(responseData);
                 
 				for(var i = 0; i < limit; ++i){
