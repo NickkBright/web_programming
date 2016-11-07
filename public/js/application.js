@@ -1,4 +1,22 @@
 "use strict";
+var userSearch = function(username, APIkey, limit){
+        $(".json-info").remove();
+        $(".error").remove();
+        $(".user-not-found").remove();
+        return new Promise(function(resolve, reject){
+            var xhr = new XMLHttpRequest();
+		xhr.open('GET', 'http://ws.audioscrobbler.com/2.0/?method=user.gettopartists&user='+username+'&api_key='+APIkey+'&limit='+limit+'&format=json', true); 
+		xhr.onload = function(){
+            var status = xhr.status;
+            if(status == 200){
+                var responseData = JSON.parse(xhr.responseText);
+                resolve(responseData);
+            }
+            else {reject(status)};
+        }
+        xhr.send();
+        });
+};
 $(document).ready(function(){
 	$("#top-artist-search").on('submit', function(event){
         
@@ -7,27 +25,7 @@ $(document).ready(function(){
         var APIkey = "a5ccaac44e419797359236f7632f2950";
         var limit = $("#set-limit").val();
 		if (limit ==""){limit = 50};
-		userSearch(username,APIkey,limit);
-	});
-});
-
-function addNewDiv(nameOfClass){
-    var newDiv = document.createElement("div");
-      newDiv.className = nameOfClass;
-        newDiv.innerHTML = "";
-    var beforeDiv = document.getElementById("row");
-    document.body.insertBefore(newDiv, beforeDiv);
-}
-
-function userSearch(username, APIkey, limit){
-        $(".json-info").remove();
-        $(".error").remove();
-        $(".user-not-found").remove();
-		var xhr = new XMLHttpRequest();
-		xhr.open('GET', 'http://ws.audioscrobbler.com/2.0/?method=user.gettopartists&user='+username+'&api_key='+APIkey+'&limit='+limit+'&format=json', true); 
-		xhr.onload = function(){
-			if(this.status == 200){
-				var responseData = JSON.parse(xhr.responseText);
+		userSearch(username,APIkey,limit).then(function(responseData){
 				if((responseData.error==6)||(responseData.topartists.artist.length==0)){
                     addNewDiv("user-not-found");
                     let source = $("#not-found-template").html();
@@ -43,18 +41,22 @@ function userSearch(username, APIkey, limit){
 				let source = $("#lastfm-template").html();
 				let template = Handlebars.compile(source);
 				$('.json-info').append(template({objects:responseData.topartists.artist}));
-			}
-            else {
-                
-            }
-		}
-        xhr.onerror = function(){
+        }, function(status){
             addNewDiv("error");
                 let source = $("#error-template").html();
 				let template = Handlebars.compile(source);
                 $('.error').append(template);
                 setTimeout(userSearch, 10000, username, APIkey, limit);
-        }
-		xhr.send();
-        
-};
+        });
+    });
+});
+
+function addNewDiv(nameOfClass){
+    var newDiv = document.createElement("div");
+      newDiv.className = nameOfClass;
+        newDiv.innerHTML = "";
+    var beforeDiv = document.getElementById("row");
+    document.body.insertBefore(newDiv, beforeDiv);
+}
+
+
