@@ -1,3 +1,3 @@
 # LastFM API 
 ### Author - Nikita Gressky
-### To run - on command line "node server.js"
+### For modules - in cmd "npm install"
