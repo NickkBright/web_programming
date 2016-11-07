@@ -16,7 +16,7 @@ $(document).ready(function(){
 
 function addNewDiv(){
     var newDiv = document.createElement("div");
-      newDiv.className = "container json-info";
+      newDiv.className = "json-info";
         newDiv.innerHTML = "";
 
     var beforeDiv = document.getElementById("row");

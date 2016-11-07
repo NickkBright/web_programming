@@ -1,5 +1,28 @@
+.header {
+    background-image: url(../img/dashboard_header.jpg);
+    background-color: rgba(52, 52, 52, 0.4);
+    background-blend-mode: darken;
+    height: 400px;
+}
+.header-text {
+    padding-top: 100px;
+    margin-top: 0px;
+}
+.no-margin {
+    margin-top: 0px;
+}
 .size {
     font-size: 30px;
+}
+.mid-pos {
+    margin-top: 70px;
+}
+.medium-font {
+    font-size: 25px;
+}
+.large-font {
+    font-size: 40px;
+    font-weight: 200;
 }
 .materialize-red {
   background-color: #e51c23 !important; }
@@ -4410,7 +4433,7 @@ textarea.materialize-textarea {
     font-size: 2rem;
     transition: color .2s; }
     .input-field .prefix.active {
-      color: #26a69a; }
+      color: #a62626; }
   .input-field .prefix ~ input,
   .input-field .prefix ~ textarea,
   .input-field .prefix ~ label,
