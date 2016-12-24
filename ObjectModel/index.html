@@ -3,58 +3,237 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
-  <title>Coding team</title>
+  <title>Little army</title>
   <link href="node_modules/materialize-css/dist/css/materialize.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
     <!--  Nav Bar-->
-<nav class="red teal">
+<nav class="red indigo">
     <div class="nav-wrapper container">
-        <a href="index.html" class="brand-logo center">Your coding team</a>
+        <a href="index.html" class="brand-logo">Little army creator</a>
+        <ul class="right">
+        <li><a href="#addUnit-modal">Add Unit<i class="material-icons left">add</i></a></li>
+        </ul>
     </div>
 </nav>
     <!--  Main part-->
-<div class="row">
-        <form class="col s12" id="ponyForm" autocomplete = "off">
-	  		<div class="row">
-		        
-		        <div class="input-field col s2">
-		          	<input id="input_name" name="name" type="text" length="20">
-		          	<label for="name">Name</label>
+<div class="row container">
+    <div class="col s12">
+            <h3 class="center">Your units</h3>
+    </div>
+    <div class="col s6">
+            <h5 class="center">Regular units</h5>
+        <div id="unitList">
+        
+        </div>
+        <script id="unit-template" type="text/x-handlebars-template">				
+			{{#each this}}
+				<div class="element">
+							<div class="card hoverable">
+							<div class="card-content">
+                                    <span class="card-title">{{name}} {{surname}}</span>
+                                    <p>Age: {{age}}</p>
+                                    <p>Weapon: {{weapon}}</p>
+                                    <p>Class: {{spec}}</p>
+                            </div>
+                            <div class="card-action right">
+                                    <a href="#editUnit-modal{{id}}" class="btn-floating btn-large waves-effect waves-light indigo"><i class="material-icons">mode_edit</i></a>
+                                    <a class="btn-floating btn-large waves-effect waves-light red deleteUnit"><i class="material-icons">delete</i></a>
+                            </div>
+						</div>
+				</div>
+<div id="editUnit-modal{{id}}" class="modal modalEdit bottom-sheet">
+    <div class="modal-content">
+        <h4 class="center">Enter data</h4>
+        <div class="row">
+         <form id="unitForm" autocomplete = "off">
+		        <div class="input-field col s6">
+		          	<input id="_name" value="{{name}}" type="text">
+		          	<label>Name</label>
 		        </div>
-                <div class="input-field col s2">
-		          	<input id="input_name" name="name" type="text" length="20">
-		          	<label for="name">Surname</label>
+		        <div class="input-field col s6">
+		          	<input id="_surname" value="{{surname}}"type="text">
+		          	<label>Surname</label>
 		        </div>
-		        <div class="input-field col s2">
-		          	<input id="input_age" name="age" type="text" length="4">
-		          	<label for="age">Age</label>
+		        <div class="input-field col s1">
+		          	<input id="_age" value="{{age}}"type="text">
+		          	<label>Age</label>
 		        </div>
-                <div class="input-field col s2">
-		          	<select id="input_kind" name="kind">
-			      		<option value="C++" selected>C++</option>
-			      		<option value="Java">Java</option>
-			      		<option value="Python">Python</option>
-			      		<option value="PHP">PHP</option>
-			    	</select>
-			    	<label>Language</label>
+		        <div class="input-field col s6">
+		          	<input id="_weapon" value="{{weapon}}"type="text">
+		          	<label>Weapon</label>
 		        </div>
-		        <div class="input-field col s2">
-		          	<input id="input_cutiemark" name="cutiemark" type="text" length="15">
-		          	<label for="cutiemark">Cutiemark</label>
-		        </div>
-		        <div class="input-field col s2">
-		          	<button class="btn waves-effect waves-light teal accent-4" type="submit" name="action">Submit
-				    	<i class="material-icons right">send</i>
-				  	</button>
-		        </div>
-		    </div>
+                <div class="input-field col s3">
+		          	<select id="_spec">
+                        <option value="" disabled selected>Choose your class:</option>
+                        <option value="sniper">Sniper</option>
+                        <option value="medic">Medic</option>
+                        <option value="stormtrooper">Storm trooper</option>
+                    </select>
+		          	<label>Class</label>
+                </div>
+                 <div class="input-field col s2">
+                <select id="_lead">
+                        <option value="" disabled selected>Select:</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                </select>
+                     <label>Commander unit</label>
+                </div>
 	  	</form>
+        </div>
+     
+    </div>
+    <div class="modal-footer">
+      <a class=" modal-action modal-close waves-effect waves-red btn-flat">Close</a>
+      <a class=" modal-action modal-close waves-effect waves-indigo btn-flat editUnit">Add</a>
+    </div>
+  </div>
+			{{/each}}		
+		</script>
+    </div>
+    <div class="col s6">
+            <h5 class="center">Commander units</h5>
+        <div id="commList">
+        
+        </div>
+        <script id="commander-template" type="text/x-handlebars-template">				
+			{{#each this}}
+				<div class="element">
+						<div class="card hoverable">
+							<div class="card-content">
+                                    <span class="card-title">{{name}} {{surname}}</span>
+                                    <p>Age: {{age}}</p>
+                                    <p>Weapon: {{weapon}}</p>
+                                    <p>Class: {{spec}}</p>
+                            </div>
+                            <div class="card-action right">
+                                    <a href="#editUnit-modal{{id}}" class="btn-floating btn-large waves-effect waves-light indigo"><i class="material-icons">mode_edit</i></a>
+                                    <a class="btn-floating btn-large waves-effect waves-light red deleteUnit"><i class="material-icons">delete</i></a>
+                            </div>
+						</div>
+				</div>
+  <div id="editUnit-modal{{id}}" class="modal modalEdit bottom-sheet">
+    <div class="modal-content">
+        <h4 class="center">Enter data</h4>
+        <div class="row">
+         <form id="unitForm" autocomplete = "off">
+		        <div class="input-field col s6">
+		          	<input id="_name" value="{{name}}" type="text">
+		          	<label>Name</label>
+		        </div>
+		        <div class="input-field col s6">
+		          	<input id="_surname" value="{{surname}}"type="text">
+		          	<label>Surname</label>
+		        </div>
+		        <div class="input-field col s1">
+		          	<input id="_age" value="{{age}}"type="text">
+		          	<label>Age</label>
+		        </div>
+		        <div class="input-field col s6">
+		          	<input id="_weapon" value="{{weapon}}"type="text">
+		          	<label>Weapon</label>
+		        </div>
+                <div class="input-field col s3">
+		          	<select id="_spec">
+                        <option value="" disabled selected>Choose your class:</option>
+                        <option value="sniper">Sniper</option>
+                        <option value="medic">Medic</option>
+                        <option value="stormtrooper">Storm trooper</option>
+                    </select>
+		          	<label>Class</label>
+                </div>
+                 <div class="input-field col s2">
+                <select id="_lead">
+                        <option value="" disabled selected>Select:</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                </select>
+                     <label>Commander unit</label>
+                </div>
+	  	</form>
+        </div>
+     
+    </div>
+    <div class="modal-footer">
+      <a class=" modal-action modal-close waves-effect waves-red btn-flat">Close</a>
+      <a class=" modal-action modal-close waves-effect waves-indigo btn-flat editUnit">Add</a>
+    </div>
+  </div>
+			{{/each}}		
+		</script>
+    </div>
 </div>
+
+    <!-- Modal Structure -->
+  <div id="addUnit-modal" class="modal  bottom-sheet">
+    <div class="modal-content">
+        <h4 class="center">Enter data</h4>
+        <div class="row">
+         <form id="unitForm" autocomplete = "off">
+		        <div class="input-field col s6">
+		          	<input id="_name" type="text">
+		          	<label>Name</label>
+		        </div>
+		        <div class="input-field col s6">
+		          	<input id="_surname" type="text">
+		          	<label>Surname</label>
+		        </div>
+		        <div class="input-field col s1">
+		          	<input id="_age" type="text">
+		          	<label>Age</label>
+		        </div>
+		        <div class="input-field col s6">
+		          	<input id="_weapon" type="text">
+		          	<label>Weapon</label>
+		        </div>
+                <div class="input-field col s3">
+		          	<select id="_spec">
+                        <option value="" disabled selected>Choose your class:</option>
+                        <option value="sniper">Sniper</option>
+                        <option value="medic">Medic</option>
+                        <option value="stormtrooper">Storm trooper</option>
+                    </select>
+		          	<label>Class</label>
+                </div>
+                 <div class="input-field col s2">
+                <select id="_lead">
+                        <option value="" disabled selected>Select:</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                </select>
+                     <label>Commander unit</label>
+                </div>
+	  	</form>
+        </div>
+     
+    </div>
+    <div class="modal-footer">
+      <a class=" modal-action modal-close waves-effect waves-red btn-flat">Close</a>
+      <a class=" modal-action modal-close waves-effect waves-indigo btn-flat addUnit">Add</a>
+    </div>
+  </div>
+ 
+          
   <!--  Scripts-->
     <script src="node_modules/jquery/dist/jquery.min.js" type="text/javascript"></script>
     <script src="node_modules/handlebars/dist/handlebars.min.js" type="text/javascript"></script>
     <script src="node_modules/materialize-css/dist/js/materialize.js" type="text/javascript"></script>
     <script src="js/index.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+           $('.modal').modal();  
+           $('select').material_select();
+        })
+        $(document).on('click', '.modal', function(){
+    $('select').material_select();
+});
+    $(document).on('click', '.modalEdit', function(){
+    $('.modal').modal();
+    $('select').material_select();
+        Materialize.updateTextFields();
+});
+    </script>
   </body>
 </html>
