@@ -24,72 +24,126 @@ Team.id = 0;
 let units = [];
 let commanders = [];
 
+let unit_template = Handlebars.compile($('#unit-template').html());
+let commander_template = Handlebars.compile($('#commander-template').html());
+
 let addUnit = () => {
 	event.preventDefault();
-	let name = $('#_name').val();
-    let surname = $('#_surname').val();
-	let age = $('#_age').val();
-	let weapon = $('#_weapon').val();
-	let spec = $('#_spec').val();
-    let lead = $('#_lead').val();
+	let name = $('#create_name').val();
+    let surname = $('#create_surname').val();
+	let age = $('#create_age').val();
+	let weapon = $('#create_weapon').val();
+	let spec = $('#create_spec').val();
+    let lead = $('#create_lead').val();
 		
-	$('#unitForm')[0].reset();
 	let unit = new Unit(name, surname, age, weapon, spec, lead, Team.id);
-	units.push(unit);
-	console.log(units);
-	compileUnit(lead, Team.id);
+	console.log(lead);
+	switch (lead) {
+		case '0':
+			units.push(unit);
+			console.log(units);
+			break;
+		case '1':
+			commanders.push(unit);
+			console.log(commanders);
+			break;
+		default:
+			console.log('Oops! Something went wrong');
+			break;
+	}
+	//compileUnit(lead, Team.id);
+	compileUnit(lead);
 }
-
-
 
 let compileUnit = (lead) => {
     console.log(lead);
-    let data = units;
+    let data;
     let template;
     let content;
-    if (lead==0){ template = Handlebars.compile($('#unit-template').html()); content = $('#unitList')[0]}
-    if (lead==1){ template = Handlebars.compile($('#commander-template').html()); content = $('#commList')[0]}
+    if (lead==0){ template = unit_template; content = $('#unitList')[0]; data = units; }
+    if (lead==1){ template = commander_template; content = $('#commList')[0]; data = commanders; }
     let result = template(data);
     content.innerHTML = result;	
 }
 
 let deleteUnit = (lead, id) => {
-    let tmp;
-	for(let i = 0; i < units.length; i++) {
-        if(units[i].id == id) {
-            tmp = units[i].lead;
-            console.log(tmp);
-            units.splice(i, 1);
+	let array = [];
+	let ld;
+	switch (lead) {
+		case '0':
+			array = units;
+			break;
+		case '1':
+			array = commanders;
+			break;
+		default:
+			console.log('Oops! Something went wrong');
+			break;
+	}
+	for(let i = 0; i < array.length; i++) {
+        if(array[i].id == id) {
+        	ld = array[i].lead
+            array.splice(i, 1);
+            compileUnit(ld);
             break;
         }
     }
-    compileUnit(tmp);
 }
 
-let editUnit = (id) => {
-	for(let i = 0; i < units.length; i++) {
-        if(units[i].id == id) {
-			$('#_name').val(units[i].name);
-            $('#_surname').val(units[i].surname);
-			$('#_age').val(units[i].age);
-			$('#_weapon').val(units[i].weapon);
-			$('#_spec').val(units[i].spec);
-            $('#_lead').val(units[i].lead)
+let searchUnit = (id, array) => {
+	for(let i = 0; i < array.length; index++) {
+        if(array[i].id == id) {
+            return array[i];
+        }
+    }
+}
+
+let editUnit = (lead, id) => {
+    let array = [];
+	let ld;
+	switch (lead) {
+		case '0':
+			array = units;
+			break;
+		case '1':
+			array = commanders;
+			break;
+		default:
+			console.log('Oops! Something went wrong');
+			break;
+	}
+    let element = searchUnit(id, array);
+	for(let i = 0; i < array.length; i++) {
+        if(array[i].id == id) {
+        	ld = array[i].lead
+            array.splice(i, 1);
+            compileUnit(ld);
             break;
         }
     }
-    addUnit();
+    let element = searchUnit(id, array);
+    element.name = $('#edit_name').val();
+    element.surname = $('#edit_surname').val();
+    element.age = $('#edit_age').val();
+    element.weapon = $('#edit_weapon').val();
+    element.spec = $('#edit_spec').val();
+    element.lead = $('#edit_lead').val();
+	compileUnit(element.lead);
 }
 
-$(document).on('click', '.addUnit', function(){
-    addUnit();
-});
+$(document).ready(function() {
+	$(document).on('click', '.addUnit', function(){
+	    addUnit();
+	    $('#unitForm')[0].reset();
+	});
 
-$(document).on('click', '.deleteUnit', function(){
-    deleteUnit(this.lead, this.id);
-});
+	$(document).on('click', '.deleteUnit', function(){
+		console.log($(this).parent().parent().parent().prop('id'));
+	    deleteUnit($(this).parent().parent().parent().prop('id'), this.id);
+	});
 
-$(document).on('click', '.editUnit', function(){
-	editUnit(this.id);
-    deleteUnit(this.lead, this.id);
+	$(document).on('click', '.editUnit', function(){
+		editUnit($(this).parent().parent().parent().prop('id'), this.id);
+	    //deleteUnit(this.id);
+	});
 });

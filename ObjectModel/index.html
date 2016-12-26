@@ -29,19 +29,19 @@
         </div>
         <script id="unit-template" type="text/x-handlebars-template">				
 			{{#each this}}
-				<div class="element">
-							<div class="card hoverable">
-							<div class="card-content">
+				<div id="{{lead}}" class="card hoverable">
+							<div class="row card-content">
+                                <div class="col s6">
                                     <span class="card-title">{{name}} {{surname}}</span>
                                     <p>Age: {{age}}</p>
                                     <p>Weapon: {{weapon}}</p>
                                     <p>Class: {{spec}}</p>
+                                </div>
+                                <div class="col s6">
+                                    <a href="#editUnit-modal{{id}}" class="btn-floating btn-large waves-effect waves-light indigo right"><i class="material-icons">mode_edit</i></a>
+                                    <a class="btn-floating btn-large waves-effect waves-light red deleteUnit right" id="{{id}}"><i class="material-icons">delete</i></a>
+                                </div>
                             </div>
-                            <div class="card-action right">
-                                    <a href="#editUnit-modal{{id}}" class="btn-floating btn-large waves-effect waves-light indigo"><i class="material-icons">mode_edit</i></a>
-                                    <a class="btn-floating btn-large waves-effect waves-light red deleteUnit"><i class="material-icons">delete</i></a>
-                            </div>
-						</div>
 				</div>
 <div id="editUnit-modal{{id}}" class="modal modalEdit bottom-sheet">
     <div class="modal-content">
@@ -49,32 +49,32 @@
         <div class="row">
          <form id="unitForm" autocomplete = "off">
 		        <div class="input-field col s6">
-		          	<input id="_name" value="{{name}}" type="text">
+		          	<input id="edit_name" value="{{name}}" type="text">
 		          	<label>Name</label>
 		        </div>
 		        <div class="input-field col s6">
-		          	<input id="_surname" value="{{surname}}"type="text">
+		          	<input id="edit_surname" value="{{surname}}"type="text">
 		          	<label>Surname</label>
 		        </div>
 		        <div class="input-field col s1">
-		          	<input id="_age" value="{{age}}"type="text">
+		          	<input id="edit_age" value="{{age}}"type="text">
 		          	<label>Age</label>
 		        </div>
 		        <div class="input-field col s6">
-		          	<input id="_weapon" value="{{weapon}}"type="text">
+		          	<input id="edit_weapon" value="{{weapon}}"type="text">
 		          	<label>Weapon</label>
 		        </div>
                 <div class="input-field col s3">
-		          	<select id="_spec">
+		          	<select id="edit_spec">
                         <option value="" disabled selected>Choose your class:</option>
-                        <option value="sniper">Sniper</option>
-                        <option value="medic">Medic</option>
-                        <option value="stormtrooper">Storm trooper</option>
+                        <option value="Sniper">Sniper</option>
+                        <option value="Medic">Medic</option>
+                        <option value="Storm Trooper">Storm trooper</option>
                     </select>
 		          	<label>Class</label>
                 </div>
                  <div class="input-field col s2">
-                <select id="_lead">
+                <select id="edit_lead">
                         <option value="" disabled selected>Select:</option>
                         <option value="1">Yes</option>
                         <option value="0">No</option>
@@ -100,19 +100,19 @@
         </div>
         <script id="commander-template" type="text/x-handlebars-template">				
 			{{#each this}}
-				<div class="element">
-						<div class="card hoverable">
-							<div class="card-content">
+				<div id="{{lead}}" class="card hoverable">
+							<div class="row card-content">
+                                <div class="col s6">
                                     <span class="card-title">{{name}} {{surname}}</span>
                                     <p>Age: {{age}}</p>
                                     <p>Weapon: {{weapon}}</p>
                                     <p>Class: {{spec}}</p>
+                                </div>
+                                <div class="col s6">
+                                    <a href="#editUnit-modal{{id}}" class="btn-floating btn-large waves-effect waves-light indigo right"><i class="material-icons">mode_edit</i></a>
+                                    <a class="btn-floating btn-large waves-effect waves-light red deleteUnit right" id="{{id}}"><i class="material-icons">delete</i></a>
+                                </div>
                             </div>
-                            <div class="card-action right">
-                                    <a href="#editUnit-modal{{id}}" class="btn-floating btn-large waves-effect waves-light indigo"><i class="material-icons">mode_edit</i></a>
-                                    <a class="btn-floating btn-large waves-effect waves-light red deleteUnit"><i class="material-icons">delete</i></a>
-                            </div>
-						</div>
 				</div>
   <div id="editUnit-modal{{id}}" class="modal modalEdit bottom-sheet">
     <div class="modal-content">
@@ -120,32 +120,32 @@
         <div class="row">
          <form id="unitForm" autocomplete = "off">
 		        <div class="input-field col s6">
-		          	<input id="_name" value="{{name}}" type="text">
+		          	<input id="edit_name" value="{{name}}" type="text">
 		          	<label>Name</label>
 		        </div>
 		        <div class="input-field col s6">
-		          	<input id="_surname" value="{{surname}}"type="text">
+		          	<input id="edit_surname" value="{{surname}}"type="text">
 		          	<label>Surname</label>
 		        </div>
 		        <div class="input-field col s1">
-		          	<input id="_age" value="{{age}}"type="text">
+		          	<input id="edit_age" value="{{age}}"type="text">
 		          	<label>Age</label>
 		        </div>
 		        <div class="input-field col s6">
-		          	<input id="_weapon" value="{{weapon}}"type="text">
+		          	<input id="edit_weapon" value="{{weapon}}"type="text">
 		          	<label>Weapon</label>
 		        </div>
                 <div class="input-field col s3">
-		          	<select id="_spec">
+		          	<select id="edit_spec">
                         <option value="" disabled selected>Choose your class:</option>
-                        <option value="sniper">Sniper</option>
-                        <option value="medic">Medic</option>
-                        <option value="stormtrooper">Storm trooper</option>
+                        <option value="Sniper">Sniper</option>
+                        <option value="Medic">Medic</option>
+                        <option value="Storm Trooper">Storm trooper</option>
                     </select>
 		          	<label>Class</label>
                 </div>
                  <div class="input-field col s2">
-                <select id="_lead">
+                <select id="edit_lead">
                         <option value="" disabled selected>Select:</option>
                         <option value="1">Yes</option>
                         <option value="0">No</option>
@@ -173,23 +173,23 @@
         <div class="row">
          <form id="unitForm" autocomplete = "off">
 		        <div class="input-field col s6">
-		          	<input id="_name" type="text">
+		          	<input id="create_name" type="text">
 		          	<label>Name</label>
 		        </div>
 		        <div class="input-field col s6">
-		          	<input id="_surname" type="text">
+		          	<input id="create_surname" type="text">
 		          	<label>Surname</label>
 		        </div>
 		        <div class="input-field col s1">
-		          	<input id="_age" type="text">
+		          	<input id="create_age" type="text">
 		          	<label>Age</label>
 		        </div>
 		        <div class="input-field col s6">
-		          	<input id="_weapon" type="text">
+		          	<input id="create_weapon" type="text">
 		          	<label>Weapon</label>
 		        </div>
                 <div class="input-field col s3">
-		          	<select id="_spec">
+		          	<select id="create_spec">
                         <option value="" disabled selected>Choose your class:</option>
                         <option value="sniper">Sniper</option>
                         <option value="medic">Medic</option>
@@ -198,7 +198,7 @@
 		          	<label>Class</label>
                 </div>
                  <div class="input-field col s2">
-                <select id="_lead">
+                <select id="create_lead">
                         <option value="" disabled selected>Select:</option>
                         <option value="1">Yes</option>
                         <option value="0">No</option>
@@ -229,7 +229,7 @@
         $(document).on('click', '.modal', function(){
     $('select').material_select();
 });
-    $(document).on('click', '.modalEdit', function(){
+    $(document).on('click', '.modal', function(){
     $('.modal').modal();
     $('select').material_select();
         Materialize.updateTextFields();
