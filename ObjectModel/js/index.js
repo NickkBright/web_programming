@@ -99,6 +99,7 @@ let searchUnit = (id, array) => {
 }
 
 let editUnit = (lead, id) => {
+    console.log(lead);
     let array = [];
 	let ld;
 	switch (lead) {
@@ -112,23 +113,19 @@ let editUnit = (lead, id) => {
 			console.log('Oops! Something went wrong');
 			break;
 	}
-    let element = searchUnit(id, array);
 	for(let i = 0; i < array.length; i++) {
         if(array[i].id == id) {
         	ld = array[i].lead
-            array.splice(i, 1);
+            array[i].name = $('#edit_name').val();
+            array[i].surname = $('#edit_surname').val();
+            array[i].age = $('#edit_age').val();
+            array[i].weapon = $('#edit_weapon').val();
+            array[i].spec = $('#edit_spec').val();
+            array[i].lead = $('#edit_lead').val();
             compileUnit(ld);
             break;
         }
     }
-    let element = searchUnit(id, array);
-    element.name = $('#edit_name').val();
-    element.surname = $('#edit_surname').val();
-    element.age = $('#edit_age').val();
-    element.weapon = $('#edit_weapon').val();
-    element.spec = $('#edit_spec').val();
-    element.lead = $('#edit_lead').val();
-	compileUnit(element.lead);
 }
 
 $(document).ready(function() {
@@ -143,7 +140,8 @@ $(document).ready(function() {
 	});
 
 	$(document).on('click', '.editUnit', function(){
-		editUnit($(this).parent().parent().parent().prop('id'), this.id);
+        console.log($(this).parent().attr('data'));
+		editUnit($(this).parent().attr('data'), this.id);
 	    //deleteUnit(this.id);
 	});
 });
