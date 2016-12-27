@@ -79,13 +79,6 @@ let deleteUnit = (lead, id) => {
     }
 }
 
-let searchUnit = (id, array) => {
-	for(let i = 0; i < array.length; i++) {
-        if(array[i].id == id) {
-            return array[i];
-        }
-    }
-}
 
 let editUnit = (lead, id) => {
     console.log(lead);
@@ -112,7 +105,7 @@ $(document).on('click', '.modal', function(){
 $(document).on('click', '.modal', function(){
     $('.modal').modal();
     $('select').material_select();
-        //Materialize.updateTextFields();
+    Materialize.updateTextFields();
 });
 $(document).ready(function() {
     $('.modal').modal();  
@@ -133,3 +126,23 @@ $(document).ready(function() {
 	    //deleteUnit(this.id);
 	});
 });
+class Team{
+	constructor(name, surname, age) {
+    	this.name = name;
+        this.surname=surname;
+		this.age = age;
+		Team.id += 1;
+	}
+}
+
+Team.id = 0;
+
+class Unit extends Team{	
+	constructor(name, surname, age, weapon, spec,  lead, id) {
+		super(name, surname, age);
+		this.weapon = weapon;
+        this.spec=spec;
+		this.id = id;
+        this.lead = lead;
+	}
+}

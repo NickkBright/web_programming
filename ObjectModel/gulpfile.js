@@ -1,30 +1,14 @@
-var browserify = require('browserify'),
-    gulp       = require('gulp'),
-    sourceFile = './build/main.js',
-    destFolder = './js/',
-    destFile   = 'findem.js';
+var gulp       = require('gulp'),
+    concat     = require('gulp-concat');
  
-gulp.task('browserify', function() {
-  return browserify(sourceFile)
-  .bundle()
-  .pipe(source(destFile))
-  .pipe(gulp.dest(destFolder));
+gulp.task('scripts', function(){					//создание одного файла js
+	return gulp.src([
+		'js/index.js',
+        'js/team.js',
+		'js/unit.js'
+		
+		])
+	.pipe(concat('script.js'))
+	//.pipe(uglify())
+	.pipe(gulp.dest('js'));
 });
-
-gulp.task('watch', function() {
-  var bundler = watchify(browserify(sourceFile));
-  bundler.on('update', rebundle);
- 
-  function rebundle() {
-    return bundler.bundle()
-      .pipe(source(destFile))
-      .pipe(gulp.dest(destFolder));
-  }
- 
-  return rebundle();
-});
-
-gulp.task('default', ['browserify', 'watch'], function () {
-  gutil.log('Gulp has finished building the project!');
-  process.exit(0);
-})

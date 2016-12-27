@@ -4,10 +4,11 @@
   "description": "Create your dream team",
   "author": "Nikita Gressky",
   "dependencies": {
-    "handlebars": "^4.0.5",
-    "materialize-css": "^0.97.7",
-    "jquery": "^3.1.1",
     "browserify": "^13.1.1",
-    "gulp":  "^3.9.1"
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "handlebars": "^4.0.5",
+    "jquery": "^3.1.1",
+    "materialize-css": "^0.97.7"
   }
 }

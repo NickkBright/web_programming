@@ -29,7 +29,7 @@
         </div>
         <script id="unit-template" type="text/x-handlebars-template">				
 			{{#each this}}
-				<div id="{{lead}}" class="card hoverable">
+				<div class="card hoverable">
 							<div class="row card-content">
                                 <div class="col s6">
                                     <span class="card-title">{{name}} {{surname}}</span>
@@ -37,8 +37,8 @@
                                     <p>Weapon: {{weapon}}</p>
                                     <p>Class: {{spec}}</p>
                                 </div>
-                                <div class="col s6">
-                                    <a href="#editUnit-modal{{id}}" class="btn-floating btn-large waves-effect waves-light indigo right"><i class="material-icons">mode_edit</i></a>
+                                <div class="col s6" id="{{lead}}">
+                                    <a href="#editUnit-modal{{id}}" class="btn-floating btn-large waves-effect waves-light indigo right" id={{id}}><i class="material-icons">mode_edit</i></a>
                                     <a class="btn-floating btn-large waves-effect waves-light red deleteUnit right" id="{{id}}"><i class="material-icons">delete</i></a>
                                 </div>
                             </div>
@@ -65,29 +65,20 @@
 		          	<label>Weapon</label>
 		        </div>
                 <div class="input-field col s3">
-		          	<select id="edit_spec">
-                        <option value="" disabled selected>Choose your class:</option>
-                        <option value="Sniper">Sniper</option>
-                        <option value="Medic">Medic</option>
-                        <option value="Storm Trooper">Storm trooper</option>
-                    </select>
-		          	<label>Class</label>
+                    <input disabled value="{{spec}}"type="text">
+                    <label>Class</label>
                 </div>
                  <div class="input-field col s2">
-                <select id="edit_lead">
-                        <option value="" disabled selected>Select:</option>
-                        <option value="1">Yes</option>
-                        <option value="0">No</option>
-                </select>
-                     <label>Commander unit</label>
+                 <input disabled value="{{leadWord}}"type="text">
+                    <label>Commander unit</label>
                 </div>
 	  	</form>
         </div>
      
     </div>
-    <div class="modal-footer" data="{{lead}}">
+    <div class="modal-footer" id="{{lead}}">
       <a class=" modal-action modal-close waves-effect waves-red btn-flat">Close</a>
-      <a class=" modal-action modal-close waves-effect waves-indigo btn-flat editUnit">Add</a>
+      <a class=" modal-action modal-close waves-effect waves-indigo btn-flat editUnit" id="{{id}}">Add</a>
     </div>
   </div>
 			{{/each}}		
@@ -100,7 +91,7 @@
         </div>
         <script id="commander-template" type="text/x-handlebars-template">				
 			{{#each this}}
-				<div id="{{lead}}" class="card hoverable">
+				<div class="card hoverable">
 							<div class="row card-content">
                                 <div class="col s6">
                                     <span class="card-title">{{name}} {{surname}}</span>
@@ -108,8 +99,8 @@
                                     <p>Weapon: {{weapon}}</p>
                                     <p>Class: {{spec}}</p>
                                 </div>
-                                <div class="col s6">
-                                    <a href="#editUnit-modal{{id}}" class="btn-floating btn-large waves-effect waves-light indigo right"><i class="material-icons">mode_edit</i></a>
+                                <div class="col s6" id="{{lead}}">
+                                    <a href="#editUnit-modal{{id}}" class="btn-floating btn-large waves-effect waves-light indigo right" id="{{id}}"><i class="material-icons">mode_edit</i></a>
                                     <a class="btn-floating btn-large waves-effect waves-light red deleteUnit right" id="{{id}}"><i class="material-icons">delete</i></a>
                                 </div>
                             </div>
@@ -136,29 +127,20 @@
 		          	<label>Weapon</label>
 		        </div>
                 <div class="input-field col s3">
-		          	<select id="edit_spec">
-                        <option value="" disabled selected>Choose your class:</option>
-                        <option value="Sniper">Sniper</option>
-                        <option value="Medic">Medic</option>
-                        <option value="Storm Trooper">Storm trooper</option>
-                    </select>
-		          	<label>Class</label>
+                    <input disabled value="{{spec}}"type="text">
+                    <label>Class</label>
                 </div>
                  <div class="input-field col s2">
-                <select id="edit_lead">
-                        <option value="" disabled selected>Select:</option>
-                        <option value="1">Yes</option>
-                        <option value="0">No</option>
-                </select>
-                     <label>Commander unit</label>
+                 <input disabled value="{{leadWord}}"type="text">
+                    <label>Commander unit</label>
                 </div>
 	  	</form>
         </div>
      
     </div>
-    <div class="modal-footer" data="{{lead}}">
+    <div class="modal-footer" id="{{lead}}">
       <a class=" modal-action modal-close waves-effect waves-red btn-flat">Close</a>
-      <a class=" modal-action modal-close waves-effect waves-indigo btn-flat editUnit">Add</a>
+      <a class=" modal-action modal-close waves-effect waves-indigo btn-flat editUnit" id="{{id}}">Add</a>
     </div>
   </div>
 			{{/each}}		
@@ -191,9 +173,9 @@
                 <div class="input-field col s3">
 		          	<select id="create_spec">
                         <option value="" disabled selected>Choose your class:</option>
-                        <option value="sniper">Sniper</option>
-                        <option value="medic">Medic</option>
-                        <option value="stormtrooper">Storm trooper</option>
+                        <option value="Sniper">Sniper</option>
+                        <option value="Medic">Medic</option>
+                        <option value="Storm trooper">Storm trooper</option>
                     </select>
 		          	<label>Class</label>
                 </div>
@@ -220,20 +202,9 @@
     <script src="node_modules/jquery/dist/jquery.min.js" type="text/javascript"></script>
     <script src="node_modules/handlebars/dist/handlebars.min.js" type="text/javascript"></script>
     <script src="node_modules/materialize-css/dist/js/materialize.js" type="text/javascript"></script>
-    <script src="js/index.js" type="text/javascript"></script>
+    <script src="js/script.js" type="text/javascript"></script>
     <script type="text/javascript">
-        $(document).ready(function(){
-           $('.modal').modal();  
-           $('select').material_select();
-        })
-        $(document).on('click', '.modal', function(){
-    $('select').material_select();
-});
-    $(document).on('click', '.modal', function(){
-    $('.modal').modal();
-    $('select').material_select();
-        Materialize.updateTextFields();
-});
+        
     </script>
   </body>
 </html>
